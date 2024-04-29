@@ -8,7 +8,7 @@ namespace FinalProject
         int zipCode,
         string email,
         string telephoneNumber)
-        : IEquatable<Person>
+        : IEquatable<Person>, IComparable<Person>
     {
         private string FirstNameLastName { get; } = firstNameLastName;
         private string Address { get; } = address;
@@ -49,6 +49,11 @@ namespace FinalProject
                    this.ZipCode.GetHashCode() ^
                    this.Email.GetHashCode() ^
                    this.TelephoneNumber.GetHashCode();
+        }
+
+        public int CompareTo(Person? obj)
+        {
+            return obj == null ? 1 : string.Compare(FirstNameLastName, obj.FirstNameLastName, StringComparison.Ordinal);
         }
     }
 }

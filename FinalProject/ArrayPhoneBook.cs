@@ -32,10 +32,6 @@ public class ArrayPhoneBook : IPhoneBook
 
     public Person? SearchPerson(string firstName, string lastName)
     {
-        if (_directory.Count == 0)
-        {
-            return null;
-        }
         _directory.Sort();
         return _directory.Count == 0 
             ? null 

@@ -2,6 +2,8 @@ namespace FinalProject
 {
     public class Person(
         string firstNameLastName,
+        string firstName,
+        string lastName,
         string address,
         string city,
         string state,
@@ -10,13 +12,15 @@ namespace FinalProject
         string telephoneNumber)
         : IEquatable<Person>, IComparable<Person>
     {
-        private string FirstNameLastName { get; } = firstNameLastName;
-        private string Address { get; } = address;
-        private string City { get; } = city;
-        private string State { get; } = state;
-        private int ZipCode { get; } = zipCode;
-        private string Email { get; } = email;
-        private string TelephoneNumber { get; } = telephoneNumber;
+        public string FirstNameLastName { get; } = firstNameLastName;
+        public string FirstName { get; } = firstName;
+        public string LastName { get; } = lastName;
+        public string Address { get; } = address;
+        public string City { get; } = city;
+        public string State { get; } = state;
+        public int ZipCode { get; } = zipCode;
+        public string Email { get; } = email;
+        public string TelephoneNumber { get; } = telephoneNumber;
 
         public bool Equals(Person? other)
         {
@@ -54,6 +58,17 @@ namespace FinalProject
         public int CompareTo(Person? obj)
         {
             return obj == null ? 1 : string.Compare(FirstNameLastName, obj.FirstNameLastName, StringComparison.Ordinal);
+        }
+
+        public override string ToString()
+        {
+            return $"Name: {FirstName} {LastName}\n" +
+                   $"Address: {Address}\n" +
+                   $"City: {City}\n" +
+                   $"State: {State}\n" +
+                   $"ZipCode: {ZipCode}\n" +
+                   $"Email: {Email}\n" +
+                   $"Telephone: {TelephoneNumber}";
         }
     }
 }

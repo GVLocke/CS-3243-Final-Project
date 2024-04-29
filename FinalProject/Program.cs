@@ -5,7 +5,7 @@ internal static class Program
     private static void Main()
     {
         var tiny = new StreamReader("../../../tiny.csv");
-        var phonebook = new ArrayPhoneBook(tiny);
+        var phonebook = new LinkedListPhoneBook(tiny);
         var person = phonebook.SearchPerson("Una", "Nichols");
         if (person == null)
         {

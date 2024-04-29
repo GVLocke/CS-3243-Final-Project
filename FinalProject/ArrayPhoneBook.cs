@@ -1,8 +1,8 @@
 namespace FinalProject;
 
-public class ArrayPhoneBook : PhoneBook
+public class ArrayPhoneBook : IPhoneBook
 {
-    private readonly List<Person?> _directory = [];
+    private readonly List<Person> _directory = [];
     public ArrayPhoneBook(StreamReader file)
     {
         var lines = new List<string>();
@@ -27,26 +27,27 @@ public class ArrayPhoneBook : PhoneBook
                  )))
         {
             _directory.Add(person);
-            _directory.Sort();
         }
     }
 
-    public override Person? SearchPerson(string firstName, string lastName)
+    public Person? SearchPerson(string firstName, string lastName)
     {
         if (_directory.Count == 0)
         {
             return null;
         }
         _directory.Sort();
-        return _directory.FirstOrDefault(person => person?.FirstNameLastName == firstName + lastName);
+        return _directory.Count == 0 
+            ? null 
+            : _directory.FirstOrDefault(person => person.FirstNameLastName == firstName + lastName);
     }
 
-    public override void Insert(Person person)
+    public void Add(Person person)
     {
         _directory.Add(person);
     }
 
-    public override void PrintDirectory()
+    public void PrintDirectory()
     {
         if (_directory.Count == 0)
         {
@@ -54,7 +55,7 @@ public class ArrayPhoneBook : PhoneBook
         }
         foreach (var person in _directory)
         {
-            Console.WriteLine(person?.ToString());
+            Console.WriteLine(person);
         }
     }
 }

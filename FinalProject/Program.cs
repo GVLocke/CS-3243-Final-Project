@@ -38,7 +38,7 @@ internal static class Program
             phonebook = CreatePhoneBook(dataStructure, reader);
             var after = GC.GetTotalMemory(true);
             var memoryUsed = after - before;
-            Console.WriteLine($"Memory used by CreatePhoneBook: {memoryUsed / 1000000} megabytes");
+            Console.WriteLine($"Memory used by CreatePhoneBook: {memoryUsed} bytes");
             Console.WriteLine($"{dataStructure} phonebook created!");
         }
         catch (ArgumentException e)
@@ -78,7 +78,7 @@ internal static class Program
                     var timespan = PerformSearches(int.Parse(args[3]), phonebook, new StreamReader(args[0]));
                     var after = GC.GetTotalMemory(true);
                     Console.WriteLine($"\nTime to search for {int.Parse(args[3])} entries: {timespan.TotalSeconds} seconds\n" +
-                                      $"Memory Used by PerformSearches: {(after - before) / 1000000} Megabytes.");
+                                      $"Memory Used by PerformSearches: {after - before} bytes.");
                 }
                 else
                 {
@@ -94,7 +94,7 @@ internal static class Program
                     var timespan = InsertNewEntries(int.Parse(args[3]), phonebook);
                     var after = GC.GetTotalMemory(true);
                     Console.WriteLine($"\nTime to insert {int.Parse(args[3])} entries: {timespan.TotalSeconds} seconds\n" +
-                                      $"Memory Used by InsertNewEntries: {(after - before) / 1000000} Megabytes.");
+                                      $"Memory Used by InsertNewEntries: {after - before} bytes.");
                 }
                 else
                 {

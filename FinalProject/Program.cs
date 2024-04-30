@@ -54,6 +54,7 @@ internal static class Program
             if (firstName == null || lastName == null)
             {
                 Console.WriteLine("Failed to read in names.");
+                return;
             }
             var person = phonebook.SearchPerson(firstName, lastName);
             if (person == null)

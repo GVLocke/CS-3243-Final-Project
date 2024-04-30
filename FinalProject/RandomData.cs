@@ -23,7 +23,7 @@ public class RandomData(
                $"{GenerateRandomPhoneNumber()}";
     }
     
-    private string GenerateRandomPhoneNumber()
+    private static string GenerateRandomPhoneNumber()
     {
         var random = new Random();
         var phoneNumber = string.Empty;

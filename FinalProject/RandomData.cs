@@ -32,7 +32,7 @@ public readonly struct RandomData(
     // Generate area code
     for (var i = 0; i < 3; i++)
     {
-        phoneNumber.Append(random.Next(0, 10).ToString());
+        phoneNumber.Append(random.Next(0, 10));
     }
 
     phoneNumber.Append('-');
@@ -40,7 +40,7 @@ public readonly struct RandomData(
     // Generate first 3 digits
     for (var i = 0; i < 3; i++)
     {
-        phoneNumber.Append(random.Next(0, 10).ToString());
+        phoneNumber.Append(random.Next(0, 10));
     }
 
     phoneNumber.Append('-');
@@ -48,7 +48,7 @@ public readonly struct RandomData(
     // Generate last 4 digits
     for (var i = 0; i < 4; i++)
     {
-        phoneNumber.Append(random.Next(0, 10).ToString());
+        phoneNumber.Append(random.Next(0, 10));
     }
 
     return phoneNumber.ToString();

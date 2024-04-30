@@ -163,13 +163,10 @@ internal static class Program
 
         var stopwatch = new Stopwatch();
         var progressBar = new ProgressBar(count);
-        foreach (var text in lastCountLines)
+        foreach (
+            var parts in lastCountLines.Select(text => text?.Split(',') 
+                                                       ?? []).TakeWhile(parts => parts.Length != 0))
         {
-            string?[] parts = text?.Split(',') ?? [];
-            if (parts.Length == 0)
-            {
-                break;
-            }
             stopwatch.Start();
             phoneBook.SearchPerson(parts[1], parts[2]);
             stopwatch.Stop();

@@ -12,3 +12,8 @@
 /Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/obj/Debug/net8.0/FinalProject.pdb
 /Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/obj/Debug/net8.0/FinalProject.genruntimeconfig.cache
 /Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/obj/Debug/net8.0/ref/FinalProject.dll
+/Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/obj/Debug/net8.0/FinalProject.sourcelink.json
+/Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/bin/Debug/net8.0/TreeLib.dll
+/Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/bin/Debug/net8.0/TreeLibInterface.dll
+/Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/obj/Debug/net8.0/FinalProject.csproj.AssemblyReference.cache
+/Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/obj/Debug/net8.0/FinalProject.csproj.CopyComplete

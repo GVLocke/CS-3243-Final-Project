@@ -1,8 +1,32 @@
 {
   "version": 2,
-  "dgSpecHash": "QGu6zEOQif5AI3l2W6PJBIeuhZSWji3Womg2mj+N4C1TQM4uWL4l1OK+ZEF1BJPSIaN0yqdCrRfojeAV9Se9EQ==",
+  "dgSpecHash": "EZiDsh1eu8+Y2P9H+ehEZOLlMlHbOVt45h9f6yGp20HblFdxvqB5r17JFZVMhivnuKxMjbGHWIl1oB+KvA8ocg==",
   "success": true,
   "projectFilePath": "/Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/FinalProject.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "expectedPackageFiles": [
+    "/Users/Keys/.nuget/packages/treelib/1.1.1/treelib.1.1.1.nupkg.sha512",
+    "/Users/Keys/.nuget/packages/treelibinterface/1.1.1/treelibinterface.1.1.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'TreeLib 1.1.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "TreeLib",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'TreeLibInterface 1.1.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "TreeLibInterface",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

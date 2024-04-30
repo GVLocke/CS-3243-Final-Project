@@ -1,8 +1,9 @@
 using System.ComponentModel;
+using System.Text;
 
 namespace FinalProject;
 
-public class RandomData(
+public readonly struct RandomData(
     IReadOnlyList<string> firstNames,
     IReadOnlyList<string> lastNames,
     IReadOnlyList<string> domainNames,
@@ -24,34 +25,34 @@ public class RandomData(
     }
     
     private static string GenerateRandomPhoneNumber()
+{
+    var random = new Random();
+    var phoneNumber = new StringBuilder();
+
+    // Generate area code
+    for (var i = 0; i < 3; i++)
     {
-        var random = new Random();
-        var phoneNumber = string.Empty;
-
-        // Generate area code
-        for (var i = 0; i < 3; i++)
-        {
-            phoneNumber += random.Next(0, 10).ToString();
-        }
-
-        phoneNumber += "-";
-
-        // Generate first 3 digits
-        for (var i = 0; i < 3; i++)
-        {
-            phoneNumber += random.Next(0, 10).ToString();
-        }
-
-        phoneNumber += "-";
-
-        // Generate last 4 digits
-        for (var i = 0; i < 4; i++)
-        {
-            phoneNumber += random.Next(0, 10).ToString();
-        }
-
-        return phoneNumber;
+        phoneNumber.Append(random.Next(0, 10).ToString());
     }
+
+    phoneNumber.Append('-');
+
+    // Generate first 3 digits
+    for (var i = 0; i < 3; i++)
+    {
+        phoneNumber.Append(random.Next(0, 10).ToString());
+    }
+
+    phoneNumber.Append('-');
+
+    // Generate last 4 digits
+    for (var i = 0; i < 4; i++)
+    {
+        phoneNumber.Append(random.Next(0, 10).ToString());
+    }
+
+    return phoneNumber.ToString();
+}
     
     private string GetRandomValue(DataRequest request)
     {

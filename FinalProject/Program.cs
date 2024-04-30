@@ -23,6 +23,8 @@ internal static class Program
                               "\tskiplist\n\n" +
                               "Commands:\n" +
                               "\tsearch: searches for a single entry in the phonebook\n" +
+                              "\tsearch [ENTRIES]: searches for ENTRIES number of entries at the end of the starter " +
+                              "data to test for speed.\n" +
                               "\tinsert [ENTRIES]: inserts ENTRIES number of random values into the phonebook.");
             return;
         }
@@ -44,38 +46,63 @@ internal static class Program
             Console.WriteLine(e);
             return;
         }
-        // Now you can use the phonebook object
-        if (args[2] == "search")
+
+        switch (args[2])
         {
-            Console.WriteLine("Enter a first name: ");
-            var firstName = Console.ReadLine();
-            Console.WriteLine("Enter last name: ");
-            var lastName = Console.ReadLine();
-            if (firstName == null || lastName == null)
+            case "search" when args.Length == 3:
             {
-                Console.WriteLine("Failed to read in names.");
-                return;
+                Console.WriteLine("Enter a first name: ");
+                var firstName = Console.ReadLine();
+                Console.WriteLine("Enter last name: ");
+                var lastName = Console.ReadLine();
+                if (firstName == null || lastName == null)
+                {
+                    Console.WriteLine("Failed to read in names.");
+                    return;
+                }
+                var person = phonebook.SearchPerson(firstName, lastName);
+                if (person == null)
+                {
+                    Console.WriteLine("No person found");
+                }
+                else
+                {
+                    Console.WriteLine(person);
+                }
+                break;
             }
-            var person = phonebook.SearchPerson(firstName, lastName);
-            if (person == null)
+            case "search" when args.Length == 4:
+                if (int.Parse(args[3]) >= 1)
+                {
+                    var before = GC.GetTotalMemory(true);
+                    var timespan = PerformSearches(int.Parse(args[3]), phonebook, new StreamReader(args[0]));
+                    var after = GC.GetTotalMemory(true);
+                    Console.WriteLine($"\nTime to search for {int.Parse(args[3])} entries: {timespan.TotalSeconds} seconds\n" +
+                                      $"Memory Used by PerformSearches: {(after - before) / 1000000} Megabytes.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid arguments. Please try again.");
+                }
+                break;
+                
+            default:
             {
-                Console.WriteLine("No person found");
+                if (args.Length == 4 && int.Parse(args[3]) >= 1)
+                {
+                    var before = GC.GetTotalMemory(true);
+                    var timespan = InsertNewEntries(int.Parse(args[3]), phonebook);
+                    var after = GC.GetTotalMemory(true);
+                    Console.WriteLine($"\nTime to insert {int.Parse(args[3])} entries: {timespan.TotalSeconds} seconds\n" +
+                                      $"Memory Used by InsertNewEntries: {(after - before) / 1000000} Megabytes.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid arguments. Please try again.");
+                }
+
+                break;
             }
-            else
-            {
-                Console.WriteLine(person);
-            }
-        } else if (args.Length == 4 && int.Parse(args[3]) >= 1)
-        {
-            var before = GC.GetTotalMemory(true);
-            var timespan = InsertNewEntries(int.Parse(args[3]), phonebook);
-            var after = GC.GetTotalMemory(true);
-            Console.WriteLine($"\nTime to insert {int.Parse(args[3])} entries: {timespan.TotalSeconds} seconds\n" +
-                              $"Memory Used by InsertNewEntries: {(after - before) / 1000000} Megabytes.");
-        }
-        else
-        {
-            Console.WriteLine("Invalid arguments. Please try again.");
         }
     }
 
@@ -117,5 +144,37 @@ internal static class Program
         var lastNames = File.ReadAllLines(LastNamesPath);
         var domains = File.ReadAllLines(DomainsPath);
         return new RandomData(firstNames, lastNames, domains, addresses);
+    }
+
+    private static TimeSpan PerformSearches(int count, IPhoneBook phoneBook, StreamReader file)
+    {
+        var lastCountLines = new Queue<string?>(count);
+        using (file)
+        {
+            while (!file.EndOfStream)
+            {
+                lastCountLines.Enqueue(file.ReadLine());
+                if (lastCountLines.Count > count)
+                {
+                    lastCountLines.Dequeue();
+                }
+            }
+        }
+
+        var stopwatch = new Stopwatch();
+        var progressBar = new ProgressBar(count);
+        foreach (var text in lastCountLines)
+        {
+            string?[] parts = text?.Split(',') ?? [];
+            if (parts.Length == 0)
+            {
+                break;
+            }
+            stopwatch.Start();
+            phoneBook.SearchPerson(parts[1], parts[2]);
+            stopwatch.Stop();
+            progressBar.Increment();
+        }
+        return stopwatch.Elapsed;
     }
 }

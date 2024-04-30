@@ -67,8 +67,11 @@ internal static class Program
             }
         } else if (args.Length == 4 && int.Parse(args[3]) >= 1)
         {
+            var before = GC.GetTotalMemory(true);
             var timespan = InsertNewEntries(int.Parse(args[3]), phonebook);
-            Console.WriteLine($"\nTime to insert {int.Parse(args[3])} entries: {timespan.TotalSeconds} seconds");
+            var after = GC.GetTotalMemory(true);
+            Console.WriteLine($"\nTime to insert {int.Parse(args[3])} entries: {timespan.TotalSeconds} seconds\n" +
+                              $"Memory Used by InsertNewEntries: {(after - before) / 1000000} Megabytes.");
         }
         else
         {
@@ -94,18 +97,15 @@ internal static class Program
     {
         var data = GenerateRandomDataRecord();
         var stopwatch = new Stopwatch();
-        var totalTimeStopwatch = new Stopwatch();
         var progressBar = new ProgressBar(count);
         for (var i = 0; i <= count; i++)
         {
-            totalTimeStopwatch.Start();
             var insertion = data.GetRandomPhoneBookEntry();
             var person = new Person($"{phoneBook.GetSize() + 1},{insertion}");
             stopwatch.Start();
             phoneBook.Add(person);
             stopwatch.Stop();
             progressBar.Increment();
-            totalTimeStopwatch.Stop();
         }
         return stopwatch.Elapsed;
     }

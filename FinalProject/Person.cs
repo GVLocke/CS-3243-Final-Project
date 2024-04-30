@@ -1,28 +1,56 @@
 namespace FinalProject
 {
-    public class Person(
-        int id,
-        string firstNameLastName,
-        string firstName,
-        string lastName,
-        string address,
-        string city,
-        string state,
-        int zipCode,
-        string email,
-        string telephoneNumber)
-        : IEquatable<Person>, IComparable<Person>
+    public class Person : IEquatable<Person>, IComparable<Person>
     {
-        public int Id { get; } = id;
-        public string FirstNameLastName { get; } = firstNameLastName;
-        public string FirstName { get; } = firstName;
-        public string LastName { get; } = lastName;
-        public string Address { get; } = address;
-        public string City { get; } = city;
-        public string State { get; } = state;
-        public int ZipCode { get; } = zipCode;
-        public string Email { get; } = email;
-        public string TelephoneNumber { get; } = telephoneNumber;
+        private int Id { get; }
+        public string FirstNameLastName { get; }
+        private string FirstName { get; }
+        private string LastName { get; }
+        private string Address { get; }
+        private string City { get; }
+        private string State { get; }
+        private int ZipCode { get; }
+        private string Email { get; }
+        private string TelephoneNumber { get; }
+
+        public Person(
+            int id,
+            string firstNameLastName,
+            string firstName,
+            string lastName,
+            string address,
+            string city,
+            string state,
+            int zipCode,
+            string email,
+            string telephoneNumber)
+        {
+            Id = id;
+            FirstNameLastName = firstNameLastName;
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
+            City = city;
+            State = state;
+            ZipCode = zipCode;
+            Email = email;
+            TelephoneNumber = telephoneNumber;
+        }
+        
+        public Person(string data)
+        {
+            var parts = data.Split(',');
+            Id = int.Parse(parts[0]);
+            FirstNameLastName = parts[1] + " " + parts[2];
+            FirstName = parts[1];
+            LastName = parts[2];
+            Address = parts[3];
+            City = parts[4];
+            State = parts[5];
+            ZipCode = int.Parse(parts[6]);
+            Email = parts[7];
+            TelephoneNumber = parts[8];
+        }
 
         public bool Equals(Person? other)
         {

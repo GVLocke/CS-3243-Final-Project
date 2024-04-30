@@ -30,6 +30,7 @@ public class HashTablePhoneBook : IPhoneBook
             _directory.Add(person.FirstNameLastName, person);
         }
     }
+    
     public Person? SearchPerson(string firstName, string lastName)
     {
         if (_directory.Count == 0)
@@ -40,20 +41,13 @@ public class HashTablePhoneBook : IPhoneBook
         return result;
     }
 
+    public int GetSize()
+    {
+        return _directory.Count;
+    }
+
     public void Add(Person person)
     {
         _directory.Add(person.FirstNameLastName, person);
-    }
-
-    public void PrintDirectory()
-    {
-        if (_directory.Count == 0)
-        {
-            Console.WriteLine("Directory is empty.");
-        }
-        foreach (var person in _directory)
-        {
-            Console.WriteLine(person.Value);
-        }
     }
 }

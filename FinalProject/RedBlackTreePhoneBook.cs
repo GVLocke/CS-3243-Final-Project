@@ -44,21 +44,13 @@ public class RedBlackTreePhoneBook : IPhoneBook
         return result;
     }
 
+    public int GetSize()
+    {
+        return (int)_directory.Count;
+    }
+
     public void Add(Person person)
     {
         _directory.Add(person.FirstNameLastName, person);
-    }
-
-    public void PrintDirectory()
-    {
-        if (_directory.Count == 0)
-        {
-            Console.WriteLine("Directory is empty.");
-        }
-
-        foreach (var person in _directory)
-        {
-            Console.WriteLine(person.Value);
-        }
     }
 }

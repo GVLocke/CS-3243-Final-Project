@@ -1,20 +1,30 @@
-﻿namespace FinalProject;
+﻿using System.Diagnostics;
+using System.Security.AccessControl;
+
+namespace FinalProject;
 
 internal static class Program
 {
+    private const string AddressesPath = "generation_data/addresses.txt";
+    private const string FirstNamesPath = "generation_data/first-names.txt";
+    private const string LastNamesPath = "generation_data/last-names.txt";
+    private const string DomainsPath = "generation_data/opendns-top-domains.txt";
     private static void Main(string[] args)
     {
-        if (args.Length == 0)
+        if (args.Length < 3)
         {
             Console.WriteLine("\n" +
-                              "Usage:   dotnet PATH DATA-STRUCTURE\n\n" +
+                              "Usage:   dotnet PATH DATA-STRUCTURE COMMAND [OPTIONS]\n\n" +
                               "A searchable phone book application.\n\n" +
                               "Data Structures:\n" +
                               "\tlist\n" +
                               "\thashtable\n" +
                               "\tlinkedlist\n" +
                               "\tredblacktree\n" +
-                              "\tskiplist\n");
+                              "\tskiplist\n\n" +
+                              "Commands:\n" +
+                              "\tsearch: searches for a single entry in the phonebook\n" +
+                              "\tinsert [ENTRIES]: inserts ENTRIES number of random values into the phonebook.");
             return;
         }
         var pathname = args[0];
@@ -23,7 +33,11 @@ internal static class Program
         IPhoneBook phonebook;
         try
         {
+            var before = GC.GetTotalMemory(true);
             phonebook = CreatePhoneBook(dataStructure, reader);
+            var after = GC.GetTotalMemory(true);
+            var memoryUsed = after - before;
+            Console.WriteLine($"Memory used by CreatePhoneBook: {memoryUsed / 1000000} megabytes");
             Console.WriteLine($"{dataStructure} phonebook created!");
         }
         catch (ArgumentException e)
@@ -32,22 +46,33 @@ internal static class Program
             return;
         }
         // Now you can use the phonebook object
-        Console.WriteLine("Enter a first name: ");
-        var firstName = Console.ReadLine();
-        Console.WriteLine("Enter last name: ");
-        var lastName = Console.ReadLine();
-        if (firstName == null || lastName == null)
+        if (args[2] == "search")
         {
-            Console.WriteLine("Failed to read in names.");
-        }
-        var person = phonebook.SearchPerson(firstName, lastName);
-        if (person == null)
+            Console.WriteLine("Enter a first name: ");
+            var firstName = Console.ReadLine();
+            Console.WriteLine("Enter last name: ");
+            var lastName = Console.ReadLine();
+            if (firstName == null || lastName == null)
+            {
+                Console.WriteLine("Failed to read in names.");
+            }
+            var person = phonebook.SearchPerson(firstName, lastName);
+            if (person == null)
+            {
+                Console.WriteLine("No person found");
+            }
+            else
+            {
+                Console.WriteLine(person);
+            }
+        } else if (args.Length == 4 && int.Parse(args[3]) >= 1)
         {
-            Console.WriteLine("No person found");
+            var timespan = InsertNewEntries(int.Parse(args[3]), phonebook);
+            Console.WriteLine($"\nTime to insert {int.Parse(args[3])} entries: {timespan.TotalSeconds} seconds");
         }
         else
         {
-            Console.WriteLine(person);
+            Console.WriteLine("Invalid arguments. Please try again.");
         }
     }
 
@@ -63,5 +88,34 @@ internal static class Program
             _ => throw new ArgumentException(
                 "Invalid data structure specified. Please choose from 'list', 'hashtable', 'linkedlist', or 'redblacktree'.")
         };
+    }
+
+    private static TimeSpan InsertNewEntries(int count, IPhoneBook phoneBook)
+    {
+        var data = GenerateRandomDataRecord();
+        var stopwatch = new Stopwatch();
+        var totalTimeStopwatch = new Stopwatch();
+        var progressBar = new ProgressBar(count);
+        for (var i = 0; i <= count; i++)
+        {
+            totalTimeStopwatch.Start();
+            var insertion = data.GetRandomPhoneBookEntry();
+            var person = new Person($"{phoneBook.GetSize() + 1},{insertion}");
+            stopwatch.Start();
+            phoneBook.Add(person);
+            stopwatch.Stop();
+            progressBar.Increment();
+            totalTimeStopwatch.Stop();
+        }
+        return stopwatch.Elapsed;
+    }
+    
+    private static RandomData GenerateRandomDataRecord()
+    {
+        var addresses = File.ReadAllLines(AddressesPath);
+        var firstNames = File.ReadAllLines(FirstNamesPath);
+        var lastNames = File.ReadAllLines(LastNamesPath);
+        var domains = File.ReadAllLines(DomainsPath);
+        return new RandomData(firstNames, lastNames, domains, addresses);
     }
 }

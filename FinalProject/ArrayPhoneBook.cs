@@ -39,20 +39,13 @@ public class ArrayPhoneBook : IPhoneBook
             : _directory.FirstOrDefault(person => person.FirstNameLastName == firstName + lastName);
     }
 
+    public int GetSize()
+    {
+        return _directory.Count;
+    }
+
     public void Add(Person person)
     {
         _directory.Add(person);
-    }
-
-    public void PrintDirectory()
-    {
-        if (_directory.Count == 0)
-        {
-            Console.WriteLine("Directory is empty.");
-        }
-        foreach (var person in _directory)
-        {
-            Console.WriteLine(person);
-        }
     }
 }

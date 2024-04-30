@@ -1,6 +1,7 @@
 namespace FinalProject
 {
     public class Person(
+        int id,
         string firstNameLastName,
         string firstName,
         string lastName,
@@ -12,6 +13,7 @@ namespace FinalProject
         string telephoneNumber)
         : IEquatable<Person>, IComparable<Person>
     {
+        public int Id { get; } = id;
         public string FirstNameLastName { get; } = firstNameLastName;
         public string FirstName { get; } = firstName;
         public string LastName { get; } = lastName;
@@ -27,7 +29,8 @@ namespace FinalProject
             if (other == null)
                 return false;
 
-            return FirstNameLastName == other.FirstNameLastName &&
+            return Id == other.Id &&
+                   FirstNameLastName == other.FirstNameLastName &&
                    Address == other.Address &&
                    City == other.City &&
                    State == other.State &&
@@ -46,7 +49,8 @@ namespace FinalProject
 
         public override int GetHashCode()
         {
-            return this.FirstNameLastName.GetHashCode() ^
+            return this.Id ^
+                   this.FirstNameLastName.GetHashCode() ^
                    this.Address.GetHashCode() ^
                    this.City.GetHashCode() ^
                    this.State.GetHashCode() ^
@@ -62,7 +66,8 @@ namespace FinalProject
 
         public override string ToString()
         {
-            return $"Name: {FirstName} {LastName}\n" +
+            return $"Id: {Id}\n" +
+                   $"Name: {FirstName} {LastName}\n" +
                    $"Address: {Address}\n" +
                    $"City: {City}\n" +
                    $"State: {State}\n" +

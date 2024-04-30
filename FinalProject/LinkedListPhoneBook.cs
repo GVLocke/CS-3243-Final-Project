@@ -16,6 +16,7 @@ public class LinkedListPhoneBook : IPhoneBook
 
         lines.RemoveAt(0);
         foreach (var person in lines.Select(line => line.Split(',')).Select(parts => new Person(
+                     id: int.Parse(parts[0]),
                      firstNameLastName: parts[1] + parts[2],
                      firstName: parts[1],
                      lastName: parts[2],

@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "EZiDsh1eu8+Y2P9H+ehEZOLlMlHbOVt45h9f6yGp20HblFdxvqB5r17JFZVMhivnuKxMjbGHWIl1oB+KvA8ocg==",
+  "dgSpecHash": "0tVNJyFBM1d/H+QTERFII9crVQ1Nk1NeKurh2dBiNm0pjkbKnwlyX/hPfD+hwudgJUV18EvDWZZyZ3cnfavpHA==",
   "success": true,
   "projectFilePath": "/Users/Keys/Projects/Data-Structures-And-Algorithms/Final-Project/FinalProject/FinalProject/FinalProject.csproj",
   "expectedPackageFiles": [
+    "/Users/Keys/.nuget/packages/maybe.net/1.0.123/maybe.net.1.0.123.nupkg.sha512",
+    "/Users/Keys/.nuget/packages/system.memory/4.5.2/system.memory.4.5.2.nupkg.sha512",
     "/Users/Keys/.nuget/packages/treelib/1.1.1/treelib.1.1.1.nupkg.sha512",
     "/Users/Keys/.nuget/packages/treelibinterface/1.1.1/treelibinterface.1.1.1.nupkg.sha512"
   ],

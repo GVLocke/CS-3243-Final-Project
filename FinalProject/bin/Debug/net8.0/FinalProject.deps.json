@@ -8,12 +8,25 @@
     ".NETCoreApp,Version=v8.0": {
       "FinalProject/1.0.0": {
         "dependencies": {
+          "Maybe.NET": "1.0.123",
           "TreeLib": "1.1.1"
         },
         "runtime": {
           "FinalProject.dll": {}
         }
       },
+      "Maybe.NET/1.0.123": {
+        "dependencies": {
+          "System.Memory": "4.5.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Maybe.dll": {
+            "assemblyVersion": "1.0.123.0",
+            "fileVersion": "1.0.123.0"
+          }
+        }
+      },
+      "System.Memory/4.5.2": {},
       "TreeLib/1.1.1": {
         "dependencies": {
           "TreeLibInterface": "1.1.1"
@@ -40,6 +53,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Maybe.NET/1.0.123": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-D1Z/zaRjGdd9ygEEJzisEZyK18HwSnAlaqhHbzcpEr4M27Z44Rb2O8yOGq47/zrZm+5Gf0w+ugkBFYvQhCrAJQ==",
+      "path": "maybe.net/1.0.123",
+      "hashPath": "maybe.net.1.0.123.nupkg.sha512"
+    },
+    "System.Memory/4.5.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fvq1GNmUFwbKv+aLVYYdgu/+gc8Nu9oFujOxIjPrsf+meis9JBzTPDL6aP/eeGOz9yPj6rRLUbOjKMpsMEWpNg==",
+      "path": "system.memory/4.5.2",
+      "hashPath": "system.memory.4.5.2.nupkg.sha512"
     },
     "TreeLib/1.1.1": {
       "type": "package",

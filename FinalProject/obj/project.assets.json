@@ -2,6 +2,31 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "Maybe.NET/1.0.123": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Maybe.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Maybe.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Memory/4.5.2": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.1/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/_._": {}
+        }
+      },
       "TreeLib/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -26,6 +51,40 @@
     }
   },
   "libraries": {
+    "Maybe.NET/1.0.123": {
+      "sha512": "D1Z/zaRjGdd9ygEEJzisEZyK18HwSnAlaqhHbzcpEr4M27Z44Rb2O8yOGq47/zrZm+5Gf0w+ugkBFYvQhCrAJQ==",
+      "type": "package",
+      "path": "maybe.net/1.0.123",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Maybe.dll",
+        "lib/netstandard2.0/Maybe.xml",
+        "maybe.net.1.0.123.nupkg.sha512",
+        "maybe.net.nuspec"
+      ]
+    },
+    "System.Memory/4.5.2": {
+      "sha512": "fvq1GNmUFwbKv+aLVYYdgu/+gc8Nu9oFujOxIjPrsf+meis9JBzTPDL6aP/eeGOz9yPj6rRLUbOjKMpsMEWpNg==",
+      "type": "package",
+      "path": "system.memory/4.5.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard1.1/System.Memory.dll",
+        "lib/netstandard1.1/System.Memory.xml",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "ref/netcoreapp2.1/_._",
+        "system.memory.4.5.2.nupkg.sha512",
+        "system.memory.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "TreeLib/1.1.1": {
       "sha512": "PSZjV6iojy4XykhaOywsiF5UaOcPREspjkMk/AWu7SOvgr3yyIbQG2I3asqOPkDvrEyAO9V9WQsQGcvXecECWw==",
       "type": "package",
@@ -55,6 +114,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Maybe.NET >= 1.0.123",
       "TreeLib >= 1.1.1"
     ]
   },
@@ -95,6 +155,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Maybe.NET": {
+            "target": "Package",
+            "version": "[1.0.123, )"
+          },
           "TreeLib": {
             "target": "Package",
             "version": "[1.1.1, )"

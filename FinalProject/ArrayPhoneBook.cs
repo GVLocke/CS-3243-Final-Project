@@ -32,12 +32,32 @@ public class ArrayPhoneBook : IPhoneBook
     }
 
     public Person? SearchPerson(string firstName, string lastName)
+{
+    _directory.Sort();
+    var target = firstName + lastName;
+    var left = 0;
+    var right = _directory.Count - 1;
+
+    while (left <= right)
     {
-        _directory.Sort();
-        return _directory.Count == 0 
-            ? null 
-            : _directory.FirstOrDefault(person => person.FirstNameLastName == firstName + lastName);
+        var mid = left + (right - left) / 2;
+        var midName = _directory[mid].FirstNameLastName;
+
+        if (midName == target)
+        {
+            return _directory[mid];
+        }
+        if (string.Compare(midName, target, StringComparison.Ordinal) < 0)
+        {
+            left = mid + 1;
+        }
+        else
+        {
+            right = mid - 1;
+        }
     }
+    return null;
+}
 
     public int GetSize()
     {

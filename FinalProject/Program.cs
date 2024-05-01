@@ -13,7 +13,7 @@ internal static class Program
         if (args.Length < 3)
         {
             Console.WriteLine("\n" +
-                              "Usage:   dotnet PATH DATA-STRUCTURE COMMAND [OPTIONS]\n\n" +
+                              "Usage:   FinalProject PATH DATA-STRUCTURE COMMAND [OPTIONS]\n\n" +
                               "A searchable phone book application.\n\n" +
                               "Data Structures:\n" +
                               "\tlist\n" +
@@ -114,7 +114,7 @@ internal static class Program
             "hashtable" => new HashTablePhoneBook(reader),
             "linkedlist" => new LinkedListPhoneBook(reader),
             "redblacktree" => new RedBlackTreePhoneBook(reader),
-            "skiplist" => new SkipList(reader),
+            "skiplist" => new SkipListPhoneBook(reader),
             _ => throw new ArgumentException(
                 "Invalid data structure specified. Please choose from 'list', 'hashtable', 'linkedlist', or 'redblacktree'.")
         };

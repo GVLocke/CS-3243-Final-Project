@@ -2,11 +2,11 @@ using Maybe.SkipList;
 
 namespace FinalProject;
 
-public class SkipList : IPhoneBook
+public class SkipListPhoneBook : IPhoneBook
 {
     private readonly SkipList<Person> _directory = [];
 
-    public SkipList(StreamReader file)
+    public SkipListPhoneBook(StreamReader file)
     {
         var lines = new List<string>();
         using (file)
